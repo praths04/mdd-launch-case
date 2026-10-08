@@ -7,11 +7,11 @@ A mock consulting engagement built entirely on public US healthcare data. A fict
 ## Findings so far
 | Question | Answer |
 |---|---|
-| Is it worth launching? | Yes: a **$4.3-8.3B** US depression drug market (list prices); add-on spend growing ~13% a year; realistic 8-10% share at maturity (~$340-830M a year), benchmarked against a comparable launch (Auvelity) |
+| Is it worth launching? | Yes: a **$4.3-8.3B** US depression drug market (list prices); add-on spend growing about 13% a year; realistic 8-10% share at maturity (about $340-830M a year), benchmarked against a comparable launch (Auvelity) |
 | Where is the value? | Branded second-line add-ons: 82% of add-on spend, branded fills growing 18% a year (volume, not price) |
-| Who competes? | 7,393 trials narrow to ~12 realistic new US competitors. The client is the only non-antipsychotic add-on at launch, for about a year before osavampator; Caplyta (J&J) is already strong in the launch region |
-| Where first? | Six connected states (TN, KY, IN, OH, MI, WI): 9.3M patients, ~16% of the US |
-| How to launch? | Be commercially ready before approval; build the prescriber network early; plan for a ~6-month commercial insurance lag; lead with "the add-on benefit without adding an antipsychotic" |
+| Who competes? | 7,393 trials narrow to about 12 realistic new US competitors. The client is the only non-antipsychotic add-on at launch, for about a year before osavampator; Caplyta (J&J) is already strong in the launch region |
+| Where first? | Six connected states (TN, KY, IN, OH, MI, WI): 9.3M patients, about 16% of the US |
+| How to launch? | Be commercially ready before approval; build the prescriber network early; plan for a commercial insurance lag of about 6 months; lead with "the add-on benefit without adding an antipsychotic" |
 
 ## Workstreams
 1. **Market sizing** (`notebooks/02_market_sizing.ipynb`): CDC PLACES, CMS Part D and Medicaid spending, MEPS 2024; triangulation of the national market, depression share of use, growth, launch analogs, state ranking.
