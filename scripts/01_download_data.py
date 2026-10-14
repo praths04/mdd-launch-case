@@ -357,11 +357,19 @@ def partd_formulary():
         print("   closest titles:", [d["title"] for d in _catalog if "formulary" in d.get("title", "").lower()][:8])
         raise RuntimeError("Formulary dataset not found in the data.cms.gov catalog; download manually from "
                            "https://data.cms.gov (search 'Prescription Drug Plan Formulary') into data/raw/")
-    print(f"   catalog title: {ds[0]['title']}")
-    zips = [x for x in ds[0].get("distribution", []) if x.get("downloadURL", "").lower().endswith(".zip")]
-    zips.sort(key=lambda x: (x.get("temporal", ""), x.get("modified", ""), x.get("downloadURL", "")), reverse=True)
+    # CMS lists each release as its own dataset ("... Information : 2019-01-02", "... : 2026-07-..."),
+    # so pool the ZIPs from every matching dataset and keep the newest by the date in its title/file name.
+    import re
+    def _date(d, x):
+        found = re.findall(r"(20\d{2})-?(\d{2})-?(\d{2})", d.get("title", "") + " " + x.get("downloadURL", "").rsplit("/", 1)[-1])
+        return max("".join(f) for f in found) if found else ""
+    zips = [(_date(d, x), d["title"], x) for d in ds for x in d.get("distribution", [])
+            if x.get("downloadURL", "").lower().endswith(".zip")]
+    zips.sort(key=lambda t: t[0], reverse=True)
     if not zips:
         raise RuntimeError("No ZIP distribution found for the formulary dataset; download manually (see above)")
+    print(f"   {len(ds)} formulary releases in catalog; newest: {[t[1] for t in zips[:3]]}")
+    zips = [t[2] for t in zips]
     print("   this is a large file (1-3 GB): expect 5-20 minutes")
     path = save(zips[0]["downloadURL"], "cms_partd_formulary_latest.zip", f"CMS Part D formulary PUF ({zips[0].get('temporal', 'latest')})")
     import zipfile

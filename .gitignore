@@ -5,3 +5,4 @@ __pycache__/
 .venv/
 outputs/_preview_*
 docs/deck_notes.md
+outputs/ws3_price_ladder.png

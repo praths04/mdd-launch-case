@@ -2,7 +2,7 @@
 
 A mock consulting engagement built entirely on public US healthcare data. A fictional mid-size biotech, with Phase 3 data due in 2027 for a once-daily pill with a novel, non-serotonin mechanism (for adults whose first antidepressant did not work well enough), asks: **should we launch in the US, at what price, and where do we focus first?**
 
-*Status (October 2026): Workstreams 1-2 complete; Workstream 3 in progress.*
+*Status (October 2026): Workstreams 1-3 complete; Workstream 4 (prescriber targeting) next.*
 
 ## Findings so far
 | Question | Answer |
@@ -11,17 +11,19 @@ A mock consulting engagement built entirely on public US healthcare data. A fict
 | Where is the value? | Branded second-line add-ons: 82% of add-on spend, branded fills growing 18% a year (volume, not price) |
 | Who competes? | 7,393 trials narrow to about 12 realistic new US competitors. The client is the only non-antipsychotic add-on at launch, for about a year before osavampator; Caplyta (J&J) is already strong in the launch region |
 | Where first? | Six connected states (TN, KY, IN, OH, MI, WI): 9.3M patients, about 16% of the US |
+| At what price? | About $940 a month by default, just below Medicare's about $950 specialty-tier line (about $299M year-2 net revenue); move to $1,350 (about $416M) only if Phase 3 proves better tolerability. The client keeps about 57% of list price after rebates and discounts. The premium only loses if insurer pushback costs it 28%+ of patients, the one assumption that can flip the decision |
+| How do patients get access? | Every Medicare plan covers the competitor brands (protected class), but hurdles follow price and role, and Michigan and Kentucky insurers add the most. Win on pre-approval support (hub + field reimbursement managers), not copay: competitors match on $0-10 cards but leave pre-approval to the doctor |
 | How to launch? | Be commercially ready before approval; build the prescriber network early; plan for a commercial insurance lag of about 6 months; lead with "the add-on benefit without adding an antipsychotic" |
 
 ## Workstreams
 1. **Market sizing** (`notebooks/02_market_sizing.ipynb`): CDC PLACES, CMS Part D and Medicaid spending, MEPS 2024; triangulation of the national market, depression share of use, growth, launch analogs, state ranking.
 2. **Competitive landscape** (`notebooks/03_competitive_landscape.ipynb`): ClinicalTrials.gov API funnel, Phase 3 research, timeline, focus competitors, Caplyta index by state, non-drug alternatives, lessons from recent launches.
-3. Pricing and access (next): CMS negotiated prices, Part D formulary coverage, patient cost.
-4. Prescriber targeting: CMS Part D prescriber-level data.
+3. **Pricing and access** (`notebooks/04_pricing_access.ipynb`): competitor price per month, Medicare negotiated prices, coverage and hurdles across 804 Medicare plans in the launch states, gross-to-net assumptions, net revenue by price scenario with break-even and sensitivity analysis, patient support package.
+4. Prescriber targeting (next): CMS Part D prescriber-level data.
 5. Go-to-market synthesis.
 
 ## Data (all public)
-CMS Medicare Part D (by geography, by prescriber, spending by drug), CMS Medicaid spending by drug, MEPS (AHRQ), CDC PLACES, Census population estimates, ClinicalTrials.gov, company disclosures and FDA announcements. Raw files are not committed; `scripts/01_download_data.py` re-downloads them and logs every download.
+CMS Medicare Part D (by geography, by prescriber, spending by drug), CMS Medicare negotiated prices, CMS Part D formulary file, CMS Medicaid spending by drug, MEPS (AHRQ), CDC PLACES, Census population estimates, ClinicalTrials.gov, company disclosures, FDA announcements and published research (MedPAC, MACPAC, IQVIA, Drug Channels). Raw files are not committed; `scripts/01_download_data.py` re-downloads them and logs every download.
 
 ## Run
 ```
