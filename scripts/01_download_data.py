@@ -48,11 +48,18 @@ def get(url, timeout=120):
 def save(url, fname, source):
     path = os.path.join(RAW, fname)
     print(f"-> {source}\n   {url}")
-    with get(url, timeout=300) as r, open(path, "wb") as f:
+    tmp = path + ".part"   # write to a temporary file; only replace the real file if the download completes
+    with get(url, timeout=300) as r, open(tmp, "wb") as f:
+        expected = int(r.headers.get("Content-Length") or 0)
+        got = 0
         while True:
             chunk = r.read(1 << 20)
             if not chunk: break
-            f.write(chunk)
+            f.write(chunk); got += len(chunk)
+    if expected and got != expected:
+        os.remove(tmp)
+        raise IOError(f"incomplete download: got {got:,} of {expected:,} bytes")
+    os.replace(tmp, path)
     rows = -1 if path.endswith(".zip") else sum(1 for _ in open(path, encoding="utf-8", errors="ignore")) - 1
     print(f"   saved {fname}" + ("" if rows < 0 else f" ({rows:,} rows)"))
     log(source, url, path, rows)
@@ -381,9 +388,9 @@ BIG = [partd_provider, partd_provider_drug]
 if __name__ == "__main__":
     mode = (sys.argv[1] if len(sys.argv) > 1 else "monday").lower()
     jobs = {"monday": MONDAY, "big": BIG, "all": MONDAY + BIG, "census": [acs, popest_age],
-            "payers": [medicaid_spending, meps], "medicaid": [medicaid_spending], "places2024": [places_2024], "meps2024": [meps_2024], "trials": [trials], "pricing": [negotiated_prices, partd_formulary], "negotiated": [negotiated_prices], "formulary": [partd_formulary]}.get(mode)
+            "payers": [medicaid_spending, meps], "medicaid": [medicaid_spending], "places2024": [places_2024], "meps2024": [meps_2024], "trials": [trials], "pricing": [negotiated_prices, partd_formulary], "negotiated": [negotiated_prices], "formulary": [partd_formulary], "provider": [partd_provider]}.get(mode)
     if jobs is None:
-        sys.exit("usage: python3 scripts/01_download_data.py [monday|big|all|census|payers|medicaid|places2024|meps2024|trials|pricing|negotiated|formulary]")
+        sys.exit("usage: python3 scripts/01_download_data.py [monday|big|all|census|payers|medicaid|places2024|meps2024|trials|pricing|negotiated|formulary|provider]")
     failed = []
     for job in jobs:
         try: job()

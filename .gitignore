@@ -6,3 +6,4 @@ __pycache__/
 outputs/_preview_*
 docs/deck_notes.md
 outputs/ws3_price_ladder.png
+data/processed/ws4_prescriber_scores.csv
