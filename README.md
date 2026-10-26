@@ -2,7 +2,9 @@
 
 A mock consulting engagement built entirely on public US healthcare data. A fictional mid-size biotech, with Phase 3 data due in 2027 for a once-daily pill with a novel, non-serotonin mechanism (for adults whose first antidepressant did not work well enough), asks: **should we launch in the US, at what price, and where do we focus first?**
 
-*Status (October 2026): Workstreams 1-4 complete; Workstream 5 (launch plan and synthesis) next.*
+*Status (October 2026): complete.*
+
+**Recommendation:** launch in six states (TN, KY, IN, OH, MI, WI) at once, at about $940 a month, with about 59 reps focused on the roughly 7,300 prescribers already using competitor brands. Prepare insurer access in Michigan and Kentucky before launch, expand nationally only after a 6-9 month checkpoint, and let Phase 3 results (2027) decide the $1,350 price and any move into primary care.
 
 ## Findings so far
 | Question | Answer |
@@ -14,14 +16,14 @@ A mock consulting engagement built entirely on public US healthcare data. A fict
 | At what price? | About $940 a month by default, just below Medicare's about $950 specialty-tier line (about $299M year-2 net revenue on a national basis); move to $1,350 (about $416M nationally) only if Phase 3 proves better tolerability. The client keeps about 57% of list price after rebates and discounts. The premium only loses if insurer pushback costs it 28%+ of patients, the one assumption that can flip the decision |
 | How do patients get access? | Every Medicare plan covers the competitor brands (protected class), but hurdles follow price and role, and Michigan and Kentucky insurers add the most. Win on pre-approval support (hub + field reimbursement managers), not copay: competitors match on $0-10 cards but leave pre-approval to the doctor |
 | Which prescribers? | 7,347 prescribers (14% of 53,642 in the six states) write 98% of competitor-brand fills, mostly nurse practitioners and psychiatrists; 1,147 (about 2%) write half. About 59 reps (about $12M a year) cover them; the six-state launch earns about $68-86M in year 2, with a checkpoint at 6-9 months |
-| How to launch? | Be commercially ready before approval; build the prescriber network early; plan for a commercial insurance lag of about 6 months; lead with "the add-on benefit without adding an antipsychotic" |
+| How to launch? | All six states at once (the client's edge over the next new competitor lasts about a year); insurer access prepared in Michigan and Kentucky 6-12 months ahead; a bridge for the ~6-month commercial insurance lag; national expansion only when the 6-9 month checkpoint is hit; Phase 3 decides price and primary care |
 
 ## Workstreams
 1. **Market sizing** (`notebooks/02_market_sizing.ipynb`): CDC PLACES, CMS Part D and Medicaid spending, MEPS 2024; triangulation of the national market, depression share of use, growth, launch analogs, state ranking.
 2. **Competitive landscape** (`notebooks/03_competitive_landscape.ipynb`): ClinicalTrials.gov API funnel, Phase 3 research, timeline, focus competitors, Caplyta index by state, non-drug alternatives, lessons from recent launches.
 3. **Pricing and access** (`notebooks/04_pricing_access.ipynb`): competitor price per month, Medicare negotiated prices, coverage and hurdles across 804 Medicare plans in the launch states, gross-to-net assumptions, net revenue by price scenario with break-even and sensitivity analysis, patient support package.
 4. **Prescriber targeting** (`notebooks/05_prescriber_targeting.ipynb`): CMS Part D prescriber x drug data for the six states; who writes competitor brands by specialty, four target groups, A/B/C tiers with a concentration curve (H4), an adoption check on the newest brand, targets by state, sales-force size and cost, and six-state revenue.
-5. Launch plan and synthesis (next).
+5. **Launch plan and synthesis** (in the deck): roadmap with two separate triggers, risks and mitigations, final recommendation and next steps. Hypothesis H1 (county-level treatment gaps) was deprioritised because it would not change the launch plan.
 
 ## Data (all public)
 CMS Medicare Part D (by geography, by prescriber, spending by drug), CMS Medicare negotiated prices, CMS Part D formulary file, CMS Medicaid spending by drug, MEPS (AHRQ), CDC PLACES, Census population estimates, ClinicalTrials.gov, company disclosures, FDA announcements and published research (MedPAC, MACPAC, IQVIA, Drug Channels). Raw files are not committed; `scripts/01_download_data.py` re-downloads them and logs every download.
